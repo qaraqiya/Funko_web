@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Us
 import Header from './Header';
 import Footer from './Footer';
 import Authorization from './Autorization'; // Import Authorization component
+import Wishlist from './Wishlist';
+
 
 function App() {
   return (
@@ -10,8 +12,9 @@ function App() {
       <div className="App min-h-screen flex flex-col">
         <Header />
 
-        <main className="flex-grow">
+        <main className="flex-grow bg-primary-white">
           <Routes>
+            <Route path='/wishlist' element={<Wishlist />}></Route>
             <Route path="/authorization" element={<Authorization />} />
           </Routes>
         </main>

@@ -9,7 +9,9 @@ const Header = () => {
 			<div className="flex space-x-4">
 				<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">Main</button>
 				<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">Product</button>
-				<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">Wish List</button>
+				<Link to={"/wishlist"}>
+					<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">Wish List</button>
+				</Link>
 			</div>
 
 			{/* Right Navigation */}
