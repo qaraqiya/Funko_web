@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AccountMenu from './AccountMenu';
-import Red_heart from './assets/red_heart.png';
-import White_heart from './assets/white_heart.png';
+import Red_heart from '../assets/red_heart.png'
+import White_heart from '../assets/white_heart.png'
 
 const ProductCard = ({ imgSrc, title, description, price }) => {
   const [isFavorited, setIsFavorited] = useState(false);

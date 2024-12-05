@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Use Routes instead of Switch
-import Header from './Header';
-import Footer from './Footer';
-import Authorization from './Autorization'; // Import Authorization component
-import Wishlist from './Wishlist';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Authorization from './components/Autorization';
+import Wishlist from './components/Wishlist';
 
 
 function App() {
