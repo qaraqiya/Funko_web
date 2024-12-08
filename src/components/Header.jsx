@@ -20,7 +20,9 @@ const Header = () => {
 				<Link to="/authorization" className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
 					Log in/Register
 				</Link>
-				<button className="px-4 py-2 bg-transparent rounded  hover:bg-white hover:text-black">Profile</button>
+				<Link to="/myaccount" className="px-4 py-2 bg-transparent rounded  hover:bg-white hover:text-black">
+					Profile
+				</Link>
 			</div>
 		</div>
 	);

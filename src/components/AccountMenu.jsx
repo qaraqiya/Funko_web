@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AccountMenu = () => {
   const [isOpen, setIsOpen] = useState(false); // Состояние для отображения меню
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -28,7 +30,8 @@ const AccountMenu = () => {
               <a
                 className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-3px] 
                 after:w-full after:h-0 after:bg-black after:rounded after:transition-all 
-                after:duration-300 after:ease-out hover:after:h-[5px] uppercase"
+                after:duration-300 after:ease-out hover:after:h-[5px] uppercase"  
+                onClick={() => navigate('/edit-profile')} // Навигация на ЭдитПрофиль
                 href=""
               >
                 Edit Profile
@@ -89,6 +92,7 @@ const AccountMenu = () => {
                 className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-3px] 
                 after:w-full after:h-0 after:bg-black after:rounded after:transition-all 
                 after:duration-300 after:ease-out hover:after:h-[5px] uppercase"
+                onClick={() => navigate('/wishlist')}
                 href=""
               >
                 Wishlist

@@ -4,6 +4,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Authorization from './components/Autorization';
 import Wishlist from './components/Wishlist';
+import MyAccount from './components/MyAccount';
+import EditProfile from './components/EditProfile';
+import ChangePassword from './ChangePassword';
+
 
 
 function App() {
@@ -15,7 +19,10 @@ function App() {
         <main className="flex-grow bg-primary-white">
           <Routes>
             <Route path='/wishlist' element={<Wishlist />}></Route>
+            <Route path='/myaccount' element={<MyAccount />}></Route>
             <Route path="/authorization" element={<Authorization />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/change-password" element={<ChangePassword />}/>
           </Routes>
         </main>
 
