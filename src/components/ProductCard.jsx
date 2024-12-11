@@ -3,7 +3,7 @@ import Red_heart from '../assets/red_heart.png'; // Изображение кр�
 import White_heart from '../assets/white_heart.png'; // Изображение белого сердечка
 
 const ProductCard = ({ imgSrc, title, description, price }) => {
-  const [isFavorited, setIsFavorited] = useState(false); // Состояние избранного
+  const [isFavorited, setIsFavorited] = useState(true); // Состояние избранного
   const [isPressed, setIsPressed] = useState(false); // Состояние нажатия
 
   // Функция для переключения состояния избранного
@@ -43,7 +43,7 @@ const ProductCard = ({ imgSrc, title, description, price }) => {
         <div>
           <img src="https://funko.com/on/demandware.static/Sites-FunkoUS-Site/-/default/dwc42b97ef/images/funko/svg/site-logo.svg" alt="" 
           className="align-baseline inline-block w-[2.625rem] h-[.9375rem]" />
-          <p className="uppercase font-thin text-sm sm:text-base">{title}</p>
+          <p className="uppercase font-thin text-sm sm:text-base w-[133px] break-words">{title}</p>
           <p className="font-bold text-sm sm:text-base">{description}</p>
           <p className="uppercase text-sm sm:text-base mb-4">{price}</p>
         </div>

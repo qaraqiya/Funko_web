@@ -31,12 +31,15 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="relative bg-primary-white mt-12 lg:mt-12 h-svh mx-auto 2xl:w-full xl:w-[1280px] lg:w-[968px] transition-all">
+    <div className="relative bg-primary-white mt-12 
+                    lg:mt-12 h-svh mx-auto 2xl:w-full 
+                    xl:w-[1280px] lg:w-[968px] md:w-[712px] 
+                    sm:w-[594px] w-[350px] transition-all">
       <h1 className="text-6xl ml-4 font-black mb-4 sm:text-5xl lg:text-6xl text-center 2xl:text-left">WISHLIST</h1>
 
       {/* Гамбургер меню */}
       <button
-        className="absolute xl:left-56 lg:left-44 top-32 left-4 p-4 bg-black text-white rounded focus:outline-none 2xl:hidden"
+        className="absolute xl:left-56 lg:left-44 md:left-36 sm:left-32 left-20 top-32 p-4 bg-black text-white rounded focus:outline-none 2xl:hidden"
         onClick={toggleMenu}
       >
         <span className="block w-6 h-0.5 bg-white mb-1"></span>
@@ -49,7 +52,7 @@ const Wishlist = () => {
         <div className="hidden 2xl:block">
           <AccountMenu />
         </div>
-        <div className="w-full lg:w-2/3 p-12 bg-white h-fit flex flex-col justify-center items-center">
+        <div className="w-2/3 p-12 bg-white h-fit flex flex-col justify-center items-center">
           <div className="custom-scroll grid grid-cols-1 gap-5 w-full overflow-y-auto max-h-[410px] overflow-x-auto">
             {wishlistItems.map(item => (
               <ProductCard
