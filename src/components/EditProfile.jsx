@@ -40,7 +40,7 @@ const EditProfile = () => {
         <div className="w-full lg:w-2/3 p-12 bg-white h-fit flex flex-col justify-center items-center">
           <div className="grid grid-cols-1 gap-6 w-full">
             <div>
-              <label className="block font-bold mb-2">First Name*</label>
+              <label className="block font-bold mb-2">First Name<span className='text-red-600'>*</span></label>
               <input
                 type="text"
                 className="border rounded p-2 w-full"
@@ -50,7 +50,7 @@ const EditProfile = () => {
               />
             </div>
             <div>
-              <label className="block font-bold mb-2">Last Name*</label>
+              <label className="block font-bold mb-2">Last Name<span className='text-red-600'>*</span></label>
               <input
                 type="text"
                 className="border rounded p-2 w-full"
@@ -69,7 +69,7 @@ const EditProfile = () => {
               />
             </div>
             <div>
-              <label className="block font-bold mb-2">Email*</label>
+              <label className="block font-bold mb-2">Email<span className='text-red-600'>*</span></label>
               <input
                 type="email"
                 className="border rounded p-2 w-full"
@@ -79,7 +79,7 @@ const EditProfile = () => {
               />
             </div>
             <div>
-              <label className="block font-bold mb-2">Current Password*</label>
+              <label className="block font-bold mb-2">Current Password<span className='text-red-600'>*</span></label>
               <input
                 type="password"
                 className="border rounded p-2 w-full"

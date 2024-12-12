@@ -14,8 +14,9 @@ const ChangePassword = () => {
       // Логика для обновления пароля на сервере
 
       // Перенаправление обратно на страницу редактирования профиля
-      navigate('/edit-profile');
+      navigate('/edit-profile'); //условно едит профиль
     } else {
+
       console.log("New password and confirmation do not match");
     }
   };
@@ -26,15 +27,20 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="relative bg-primary-white mt-12 mx-auto 2xl:w-full xl:w-[1280px] lg:w-[968px] macbook:w-[900px] md:w-[768px] sm:w-[640px] mobile:w-[340px] transition-all">
-      <h1 className="text-6xl ml-4 font-black mb-4 sm:text-5xl lg:text-6xl text-center 2xl:text-left">CHANGE PASSWORD</h1>
+    <div className="relative bg-primary-white mt-12 mx-auto 2xl:w-full 
+                    xl:w-[1280px] lg:w-[968px] macbook:w-[900px] md:w-[768px] 
+                    sm:w-[640px] mobile:w-[340px] transition-all">
+      <h1 className="text-6xl ml-4 font-black mb-4 sm:text-5xl 
+                     lg:text-6xl text-center 2xl:text-left">
+        CHANGE PASSWORD
+      </h1>
       
       <div className="flex justify-center mt-[50px]">
         <div className="w-full lg:w-2/3 p-12 bg-white h-fit flex flex-col justify-center items-center">
           <div className="grid grid-cols-1 gap-6 w-full">
             {/* Current Password */}
             <div>
-              <label className="block font-bold mb-2">Current Password*</label>
+              <label className="block font-bold mb-2">Current Password<span className='text-red-600'>*</span></label>
               <input
                 type="password"
                 className="border rounded p-2 w-full"
@@ -46,7 +52,7 @@ const ChangePassword = () => {
 
             {/* New Password */}
             <div>
-              <label className="block font-bold mb-2">New Password*</label>
+              <label className="block font-bold mb-2">New Password<span className='text-red-600'>*</span></label>
               <input
                 type="password"
                 className="border rounded p-2 w-full"
@@ -58,7 +64,7 @@ const ChangePassword = () => {
 
             {/* Confirm New Password */}
             <div>
-              <label className="block font-bold mb-2">Confirm New Password*</label>
+              <label className="block font-bold mb-2">Confirm New Password<span className='text-red-600'>*</span></label>
               <input
                 type="password"
                 className="border rounded p-2 w-full"

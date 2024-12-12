@@ -82,7 +82,17 @@ const MyAccount = () => {
               <div className="justify-between items-center mb-4">
                 <div className="flex justify-between">
                 <h2 className="text-lg font-black">WISHLIST</h2>
-                <a onClick={() => navigate('/wishlist')} className="text-[#6c6c6c] text-base">
+                <a onClick={() => navigate('/wishlist')} 
+                   className="text-gray-500 text-base cursor-pointer flex items-center">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="" className='w-4 h-4 mr-1'>
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier"> 
+                      <path fill-rule="evenodd" 
+                            clip-rule="evenodd" d="M23 4C23 2.34315 21.6569 1 20 1H4C2.34315 1 1 2.34315 1 4V8C1 9.65685 2.34315 11 4 11H20C21.6569 11 23 9.65685 23 8V4ZM21 4C21 3.44772 20.5523 3 20 3H4C3.44772 3 3 3.44772 3 4V8C3 8.55228 3.44772 9 4 9H20C20.5523 9 21 8.55228 21 8V4Z" fill="#6b7280 "></path> 
+                      <path fill-rule="evenodd" 
+                            clip-rule="evenodd" d="M23 16C23 14.3431 21.6569 13 20 13H4C2.34315 13 1 14.3431 1 16V20C1 21.6569 2.34315 23 4 23H20C21.6569 23 23 21.6569 23 20V16ZM21 16C21 15.4477 20.5523 15 20 15H4C3.44772 15 3 15.4477 3 16V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V16Z" fill="#6b7280 "></path> 
+                      </g></svg>
                     VIEW ALL
                 </a>
                 </div>
@@ -107,7 +117,7 @@ const MyAccount = () => {
                   <img className="w-4 h-4 mr-1" 
                    src="https://funko.com/on/demandware.static/Sites-FunkoUS-Site/-/default/dwd48a9e64/images/svg/pencil.svg"
                    alt="edit address book" />
-                  <span className='text-[#6c6c6c] text-base uppercase'>Manage</span>
+                  <span className='text-[#6c6c6c] text-base uppercase cursor-pointer'>Manage</span>
                 </a>
               </div>
               <div className="grid grid-cols-2 gap-4">

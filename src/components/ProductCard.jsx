@@ -40,7 +40,7 @@ const ProductCard = ({ imgSrc, title, description, price }) => {
         <img src={imgSrc} alt={title} className="w-[96px] h-[96px] mb-4 sm:mb-0" />
       </div>
       <div className="text-lg font-semibold justify-around flex flex-col lg:flex-row lg:gap-10 lg:items-center items-start gap-4">
-        <div>
+        <div className='flex flex-col mx-auto'>
           <img src="https://funko.com/on/demandware.static/Sites-FunkoUS-Site/-/default/dwc42b97ef/images/funko/svg/site-logo.svg" alt="" 
           className="align-baseline inline-block w-[2.625rem] h-[.9375rem]" />
           <p className="uppercase font-thin text-sm sm:text-base w-[133px] break-words">{title}</p>

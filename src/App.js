@@ -6,7 +6,8 @@ import Authorization from './components/Autorization';
 import Wishlist from './components/Wishlist';
 import MyAccount from './components/MyAccount';
 import EditProfile from './components/EditProfile';
-import ChangePassword from './ChangePassword';
+import ChangePassword from './components/ChangePassword';
+
 
 
 

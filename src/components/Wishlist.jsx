@@ -35,11 +35,12 @@ const Wishlist = () => {
                     lg:mt-12 h-svh mx-auto 2xl:w-full 
                     xl:w-[1280px] lg:w-[968px] md:w-[712px] 
                     sm:w-[594px] w-[350px] transition-all">
-      <h1 className="text-6xl ml-4 font-black mb-4 sm:text-5xl lg:text-6xl text-center 2xl:text-left">WISHLIST</h1>
+      <h1 className="text-6xl ml-4 font-black mb-4 text-center 2xl:text-left">WISHLIST</h1>
 
       {/* Гамбургер меню */}
       <button
-        className="absolute xl:left-56 lg:left-44 md:left-36 sm:left-32 left-20 top-32 p-4 bg-black text-white rounded focus:outline-none 2xl:hidden"
+        className="absolute xl:left-56 lg:left-44 md:left-36 sm:left-32 left-20 top-32 p-4 
+                 bg-black text-white rounded focus:outline-none cursor-pointer 2xl:hidden"
         onClick={toggleMenu}
       >
         <span className="block w-6 h-0.5 bg-white mb-1"></span>
