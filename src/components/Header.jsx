@@ -32,9 +32,11 @@ const Header = () => {
 			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
 			Main
 			</button>
+			<Link to="/product">
 			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
 			Product
 			</button>
+			</Link>
 			<Link to="/wishlist">
 			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
 			Wish List
@@ -66,33 +68,33 @@ const Header = () => {
 
 		{/* Mobile Navigation Menu */}
 		<nav
-		className={`${
-			menuOpen ? 'block' : 'hidden'
-		} lg:hidden flex flex-col items-center bg-black p-4 w-full absolute top-full left-0 z-20`}
+			className={`${
+				menuOpen ? 'block' : 'hidden'
+			} lg:hidden flex flex-col items-center bg-black p-4 w-full absolute top-full left-0 z-20`}
 		>
-		<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
-			Main
-		</button>
-		<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
-			Product
-		</button>
-		<Link to="/wishlist">
 			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
-			Wish List
+				Main
 			</button>
-		</Link>
-		<Link
-			to="/authorization"
-			className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black"
-		>
-			Log in/Register
-		</Link>
-		<Link
-			to="/myaccount"
-			className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black"
-		>
-			Profile
-		</Link>
+			<Link to="/product">
+				<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+					Product
+				</button>
+			</Link>
+			<Link to="/wishlist">
+				<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+				Wish List
+				</button>
+			</Link>
+			<Link
+				to="/authorization"
+				className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+				Log in/Register
+			</Link>
+			<Link
+				to="/myaccount"
+				className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+				Profile
+			</Link>
 		</nav>
 
 		{/* Overlay for Mobile Menu */}

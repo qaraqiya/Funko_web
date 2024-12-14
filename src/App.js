@@ -7,6 +7,7 @@ import Wishlist from './components/Wishlist';
 import MyAccount from './components/MyAccount';
 import EditProfile from './components/EditProfile';
 import ChangePassword from './components/ChangePassword';
+import ProductPage from './components/ProductPage';
 
 
 
@@ -19,11 +20,12 @@ function App() {
 
         <main className="flex-grow bg-primary-white">
           <Routes>
-            <Route path='/wishlist' element={<Wishlist />}></Route>
-            <Route path='/myaccount' element={<MyAccount />}></Route>
-            <Route path="/authorization" element={<Authorization />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
-            <Route path="/change-password" element={<ChangePassword />}/>
+			<Route path='/product' element={<ProductPage />}></Route>
+			<Route path='/wishlist' element={<Wishlist />}></Route>
+			<Route path='/myaccount' element={<MyAccount />}></Route>
+			<Route path="/authorization" element={<Authorization />} />
+			<Route path="/edit-profile" element={<EditProfile />} />
+			<Route path="/change-password" element={<ChangePassword />}/>
           </Routes>
         </main>
 
