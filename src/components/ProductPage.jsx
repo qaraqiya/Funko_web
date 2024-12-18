@@ -1,78 +1,95 @@
 import React, { useState } from 'react';
-import products from './data/products.json';
+import ProductModal from './ProductModal';
+import products from './data/products.json'; // Импортируем все продукты
+import Red_heart from '../assets/red_heart.png'; // Изображение красного сердечка
+import White_heart from '../assets/white_heart.png'; // Изображение белого сердечка
 
 const ProductPage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const openModal = (product) => {
-    setSelectedProduct(product);
+  // Статичные рекомендации (первые 50 продуктов)
+  const staticRecommendations = products.slice(0, 50); // Берем первые 50 продуктов
+
+  // Состояние для каждого продукта (с сердечками)
+  const [favoriteProducts, setFavoriteProducts] = useState(
+    products.reduce((acc, product) => {
+      acc[product.Id] = false; // Изначально все продукты не в избранном
+      return acc;
+    }, {})
+  );
+
+  // Функция для переключения состояния избранного для конкретного продукта
+  const toggleFavorite = (productId) => {
+    setFavoriteProducts((prevState) => ({
+      ...prevState,
+      [productId]: !prevState[productId],
+    }));
   };
 
-  const closeModal = () => {
-    setSelectedProduct(null);
-  };
+  const openModal = (product) => setSelectedProduct(product);
+  const closeModal = () => setSelectedProduct(null);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-6xl p-4">
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map((product) => (
-            <div
-              key={product.Id}
-              className="bg-white rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl"
+    <div className="flex flex-wrap justify-center p-6 bg-white min-h-screen">
+      {/* Отображение всех продуктов */}
+      {products.map((product) => (
+        <div
+          key={product.Id}
+          className="w-80 min-h-80 bg-white rounded-lg border-4 shadow-md m-4 transition-transform transform hover:scale-105"
+        >
+          <div className="relative p-4">
+            <img
+              src={product.Images[0]}
+              alt={product.Name}
+              className="w-full h-100 object-cover rounded-t-lg transform transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
               onClick={() => openModal(product)}
+            />
+            {/* Сердечко с анимацией для каждого продукта */}
+            <div
+              className="absolute top-4 right-4 cursor-pointer"
+              onClick={() => toggleFavorite(product.Id)} // Переключаем состояние сердечка для конкретного продукта
             >
               <img
-                src={product.Images[0]}
-                alt={product.Name}
-                className="w-full h-48 object-cover rounded-t-lg"
+                src={favoriteProducts[product.Id] ? Red_heart : White_heart}
+                alt="Heart"
+                className="w-8 h-6 transition-transform duration-200"
               />
-              <div className="mt-2">
-                <h2 className="text-lg font-bold">{product.Name}</h2>
-                <p className="text-gray-600">{product.Category}</p>
-                <p className="text-gray-800 font-semibold">{product.DefaultPrice}</p>
+            </div>
+          </div>
+          <div className="p-4">
+            <h2 className="text-lg font-semibold text-gray-800 text-center">{product.Name}</h2>
+            <p className="text-sm text-gray-500 text-center">Category: {product.Category}</p>
+            <div className="flex justify-between items-center mt-4">
+              <div className="text-left">
+                <p className="text-xl font-bold text-black">{product.DefaultPrice}</p>
               </div>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* Статичные рекомендации */}
+      <div className="w-full mt-6">
+        <h3 className="text-xl font-semibold mb-4">You might also like:</h3>
+        <div className="flex overflow-x-auto gap-4 pb-4">
+          {staticRecommendations.map((item) => (
+            <div
+              key={item.Id}
+              className="min-w-[200px] bg-gray-100 p-4 rounded-lg shadow hover:scale-105 transform transition-transform duration-200"
+            >
+              <img
+                src={item.Images[0]}
+                alt={item.Name}
+                className="w-full h-32 object-cover rounded-lg mb-4"
+              />
+              <h4 className="text-center text-lg font-semibold">{item.Name}</h4>
             </div>
           ))}
         </div>
-
-        {/* Modal */}
-        {selectedProduct && (
-		<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-			<div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-4 relative overflow-hidden">
-				<button
-				className="text-gray-500 hover:text-gray-800 text-xl font-bold absolute top-4 right-4"
-				onClick={closeModal}
-				>
-				&times;
-				</button>
-				<div className="overflow-y-auto max-h-[80vh] p-4">
-				<img
-					src={selectedProduct.Images[0]}
-					alt={selectedProduct.Name}
-					className="w-full h-auto mb-4 rounded"
-				/>
-				<div>
-					<h2 className="text-2xl font-bold mb-2">{selectedProduct.Name}</h2>
-					<p className="text-gray-600 mb-1">
-					<strong>Category:</strong> {selectedProduct.Category}
-					</p>
-					<p className="text-gray-600 mb-1">
-					<strong>Price:</strong> {selectedProduct.DefaultPrice}
-					</p>
-					<p className="text-gray-600 mb-4">
-					<strong>Status:</strong> {selectedProduct.Status}
-					</p>
-					<h3 className="text-lg font-semibold mb-1">Description</h3>
-					<p className="text-gray-700 mb-4">{selectedProduct.Description}</p>
-				</div>
-				</div>
-			</div>
-		</div>
-		)}
-
       </div>
+
+      {/* Модальное окно */}
+      {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
     </div>
   );
 };
