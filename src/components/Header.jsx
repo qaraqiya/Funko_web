@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SearchInput from './SearchInput';
+import SearchInput from './common/SearchInput';
 import { Link } from 'react-router-dom';
 
 const Header = () => {

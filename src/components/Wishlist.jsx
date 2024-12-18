@@ -1,26 +1,15 @@
 import React, { useState } from 'react';
 import AccountMenu from './AccountMenu';
 import ProductCard from './ProductCard'; // Импорт компонента ProductCard
-
-const wishlistItems = [
-  {
-    id: 1,
-    imgSrc: 'https://funko.com/dw/image/v2/BGTS_PRD/on/demandware.static/-/Sites-funko-master-catalog/default/dw718105db/images/funko/upload/75699_HxH_Chrollo_POP_GLAM-WEB.png?sw=150&sh=150',
-    title: 'Hunter x Hunter',
-    description: 'Pop! Chrollo',
-    price: '$15.00',
-  },
-  {
-    id: 2,
-    imgSrc: 'https://funko.com/dw/image/v2/BGTS_PRD/on/demandware.static/-/Sites-funko-master-catalog/default/dw47fc23fe/images/funko/upload/74474-POP-Animation-One-Piece---Marco_GLAM-WEB.png?sw=800&sh=800',
-    title: 'One Piece',
-    description: 'Pop! Marco',
-    price: '$15.00',
-  },
-];
+import ProductModal from "./ProductModal";
+import products from './data/products.json'; // Импорт данных из JSON
 
 const Wishlist = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null); // Состояние для выбранного продукта (для модального окна)
+  const [menuOpen, setMenuOpen] = useState(false); // Состояние для меню
+
+  // Заглушка: в будущем можно сделать связь с бэкендом, но пока берем пару товаров из products.json
+  const wishlistItems = products.slice(0, 2); // Используем первые 2 товара для примера
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -29,6 +18,9 @@ const Wishlist = () => {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
+  const openModal = (product) => setSelectedProduct(product); // Открыть модальное окно
+  const closeModal = () => setSelectedProduct(null); // Закрыть модальное окно
 
   return (
     <div className="relative bg-primary-white mt-12 
@@ -54,14 +46,18 @@ const Wishlist = () => {
           <AccountMenu />
         </div>
         <div className="w-2/3 p-12 bg-white h-fit flex flex-col justify-center items-center">
-          <div className="custom-scroll grid grid-cols-1 gap-5 w-full overflow-y-auto max-h-[410px] overflow-x-auto">
+          <div className="custom-scroll grid grid-cols-1 gap-5 w-full overflow-y-auto max-h-[410px] 
+                          overflow-x-auto cursor-pointer"> 
+                
             {wishlistItems.map(item => (
               <ProductCard
-                key={item.id}
-                imgSrc={item.imgSrc}
-                title={item.title}
-                description={item.description}
-                price={item.price}
+                key={item.Id}
+                imgSrc={item.Images[0]}
+                title={item.Name}
+                description={item.Category}
+                price={`${item.DefaultPrice}`}
+                onClick={() => openModal(item)}
+                 // Открытие модального окна при клике на товар
               />
             ))}
           </div>
@@ -95,6 +91,9 @@ const Wishlist = () => {
           <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-10" onClick={closeMenu}></div>
         </>
       )}
+
+      {/* Модальное окно для выбранного продукта */}
+      {selectedProduct && <ProductModal product={selectedProduct} onClose={closeModal} />}
     </div>
   );
 };

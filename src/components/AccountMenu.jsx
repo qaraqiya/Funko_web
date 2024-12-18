@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from './common/Button';
 
 const AccountMenu = () => {
   const [isOpen, setIsOpen] = useState(false); // Состояние для отображения меню
@@ -112,11 +113,12 @@ const AccountMenu = () => {
             </h3>
           </li>
         </ul>
-        <button className="mt-10 px-[20px] py-[8px] font-black bg-black text-white 
-                  transition-colors duration-200 w-3/4 border-solid border-2 
-                  border-black rounded-[24px] hover:bg-white hover:text-black">
-          BACK TO DASHBOARD
-        </button>
+        <Button
+          text="BACK TO DASHBOARD"
+          onClick={() => console.log('Back to Dashboard')}
+          className="mt-10 px-[20px] py-[8px] font-black bg-black text-white transition-colors duration-200 w-3/4 border-solid border-2 border-black rounded-[24px] hover:bg-white hover:text-black"
+        />
+
       </div>
     </div>
   );
