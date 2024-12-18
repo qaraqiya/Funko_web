@@ -8,6 +8,8 @@ import MyAccount from './components/MyAccount';
 import EditProfile from './components/EditProfile';
 import ChangePassword from './components/ChangePassword';
 import ProductPage from './components/ProductPage';
+import Cart from './components/cart/Cart';
+
 
 
 
@@ -26,6 +28,7 @@ function App() {
 			<Route path="/authorization" element={<Authorization />} />
 			<Route path="/edit-profile" element={<EditProfile />} />
 			<Route path="/change-password" element={<ChangePassword />}/>
+			<Route path="/cart" element={<Cart />}/>
           </Routes>
         </main>
 
