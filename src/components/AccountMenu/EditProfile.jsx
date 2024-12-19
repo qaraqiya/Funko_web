@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AccountMenu from './AccountMenu';
+import MAccountMenu from './MAccountMenu';
+
 
 const EditProfile = () => {
   const [firstName, setFirstName] = useState("John");
@@ -29,16 +31,38 @@ const EditProfile = () => {
     navigate('/change-password');
   };
 
-  return (
-    <div className="relative bg-primary-white mt-12 mx-auto 2xl:w-full xl:w-[1280px] lg:w-[968px] macbook:w-[900px] md:w-[768px] sm:w-[640px] mobile:w-[340px] transition-all">
-      <h1 className="text-6xl ml-4 font-black mb-4 sm:text-5xl lg:text-6xl text-center 2xl:text-left">EDIT PROFILE</h1>
+    const [menuOpen, setMenuOpen] = useState(false); // Состояние для меню
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    console.log(1);
+    
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+
+  return (
+    <div className="relative bg-primary-white mt-12 mx-auto 2xl:w-full xl:w-[1280px] 
+                    lg:w-[968px] macbook:w-[900px] md:w-[768px] sm:w-[640px] mobile:w-[340px] transition-all">
+      <h1 className="text-6xl ml-4 font-black mb-4 sm:text-5xl lg:text-6xl text-center 2xl:text-left">EDIT PROFILE</h1>
+      <button
+        className="absolute xl:left-56 lg:left-44 lg:top-32
+                   sm:top-28 left-4 top-48 p-4 bg-black text-white 
+                   rounded focus:outline-none cursor-pointer 2xl:hidden"
+        onClick={toggleMenu}>
+        <span className="block w-6 h-0.5 bg-white mb-1"></span>
+        <span className="block w-6 h-0.5 bg-white mb-1"></span>
+        <span className="block w-6 h-0.5 bg-white"></span>
+      </button>
       <div className="flex justify-center mt-[50px]">
         <div className="hidden 2xl:block">
           <AccountMenu />
         </div>
-        <div className="w-full lg:w-2/3 p-12 bg-white h-fit flex flex-col justify-center items-center">
-          <div className="grid grid-cols-1 gap-6 w-full">
+        <div className="w-full lg:w-2/3 p-12 bg-white flex flex-col justify-center items-center mb-10">
+          <div className="grid grid-cols-1 gap-6 w-full mt-10">
             <div>
               <label className="block font-bold mb-2">First Name<span className='text-red-600'>*</span></label>
               <input
@@ -101,6 +125,21 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
+      {menuOpen && (
+        <>
+          <div className="fixed top-0 left-0 w-[300px] h-full bg-white z-20 p-6 shadow-lg">
+            {/* Мобильное меню */}
+            <MAccountMenu />
+            <button
+              className="mt-4 px-4 py-2 bg-black text-white rounded focus:outline-none"
+              onClick={closeMenu}
+            >
+              Done
+            </button>
+          </div>
+          <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-10" onClick={closeMenu}></div>
+        </>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductCard from './ProductCard'
 import { useNavigate, Link } from 'react-router-dom';
+import ProductCard from '../ProductCard';
 
 
 const wishlistItems = [
