@@ -60,7 +60,7 @@ const ProductCard = ({ imgSrc, title, description, price, onClick }) => {
           className="align-baseline inline-block w-[2.625rem] h-[.9375rem]" />
           <p className="uppercase font-thin text-sm sm:text-base w-[133px] break-words">{title}</p>
           <p className="font-bold text-sm sm:text-base">{description}</p>
-          <p className="uppercase text-sm sm:text-base mb-4">{price}</p>
+          <p className="uppercase text-sm sm:text-base mb-4">${price}</p>
         </div>
         <Button text="Move to Cart" onClick={moveToCart} />
       </div>
