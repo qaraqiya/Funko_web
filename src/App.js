@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Us
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Authorization from "./components/Autorization";
-import Wishlist from "./components/Wishlist";
-import MyAccount from "./components/MyAccount";
-import EditProfile from "./components/EditProfile";
+import Wishlist from "./components/AccountMenu/Wishlist";
+import MyAccount from "./components/AccountMenu/MyAccount";
+import EditProfile from "./components/AccountMenu/EditProfile";
 import ChangePassword from "./components/ChangePassword";
 import MainPage from "./components/MainPage";
 
