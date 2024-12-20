@@ -7,7 +7,7 @@ module.exports = {
                 "primary-white": "#f3f3f7",
             },
             fontFamily: {
-                urbanist: ["Urbanist", "sans-serif"],
+                lexend: ["'Lexend'", "serif"],
             },
             screens: {
                 macbook: "896px",
