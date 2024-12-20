@@ -1,34 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate для навигации
+import { useNavigate } from 'react-router-dom';
 import Red_heart from '../assets/red_heart.png'; 
 import White_heart from '../assets/white_heart.png'; 
 import Button from './common/Button.jsx';
 
-const ProductCard = ({ imgSrc, title, description, price, onClick }) => {
-  const [isFavorited, setIsFavorited] = useState(true); 
-  const [isPressed, setIsPressed] = useState(false); 
+const ProductCard = ({ imgSrc, title, description, price, onClick, onToggleFavorite, isFavorited }) => {
+  const [isPressed, setIsPressed] = useState(false);
 
   const navigate = useNavigate(); // Инициализируем navigate
 
-  // Функция для переключения состояния избранного
-  const toggleFavorite = () => {
-    setIsFavorited(!isFavorited);
-  };
-
-  // Обработка нажатия
-  const handlePress = () => {
-    setIsPressed(true);
-  };
-
-  // Обработка отпускания кнопки
-  const handleRelease = () => {
-    setIsPressed(false);
-  };
-
-  // Функция для перенаправления в корзину
-  const moveToCart = () => {
-    navigate('/cart'); // Переход на страницу корзины
-  };
+  const handlePress = () => setIsPressed(true);
+  const handleRelease = () => setIsPressed(false);
 
   return (
     <div 
@@ -38,8 +20,8 @@ const ProductCard = ({ imgSrc, title, description, price, onClick }) => {
       <div className="relative">
         <button
           onClick={(e) => {
-            e.stopPropagation(); 
-            toggleFavorite();
+            e.stopPropagation();
+            onToggleFavorite(); // Вызов функции для удаления товара
           }}
           onMouseDown={handlePress}
           onMouseUp={handleRelease}
@@ -62,7 +44,7 @@ const ProductCard = ({ imgSrc, title, description, price, onClick }) => {
           <p className="font-bold text-sm sm:text-base">{description}</p>
           <p className="uppercase text-sm sm:text-base mb-4">${price}</p>
         </div>
-        <Button text="Move to Cart" onClick={moveToCart} />
+        <Button text="Move to Cart" onClick={() => navigate('/cart')} />
       </div>
     </div>
   );

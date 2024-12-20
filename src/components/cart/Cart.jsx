@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CartItem from './CartItem';
-import CartSummary from './CartSummary'; // Просто импортируем CartSummary
-import products from '../data/products.json'; // Импорт данных из JSON
+import CartSummary from './CartSummary'; 
+import axios from 'axios'; // Импорт библиотеки для запросов к API
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -11,14 +11,29 @@ const Cart = () => {
     estimatedTotal: 0,
   });
 
+  // Заголовки для авторизации с токеном
+  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcm9uIiwiaWF0IjoxNzM0NzIxMDY0LCJleHAiOjE3MzQ3NzUwNjR9.qF-AnRuwBUrkShgHlA-HeYAKsDBI6aD5iP0Oud5_5wk";
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    accept: "*/*",
+  };
+
+  // Запрос к API для получения товаров в корзине (Wishlist)
   useEffect(() => {
-    // Заглушка: в будущем связь с бэкендом для добавления товаров в корзину
-    const initialCartItems = products.slice(0, 3).map(product => ({
-      ...product,
-      qty: 1, // По умолчанию количество товара = 1
-    }));
-    setCartItems(initialCartItems);
-    updateTotals(initialCartItems);
+    axios
+      .get('https://funko-store.onrender.com/api/wishlist', { headers }) // Запрос на получение товаров
+      .then((response) => {
+        const wishlistItems = response.data.wishlistItems.map((item) => ({
+          ...item,
+          qty: 1, // Устанавливаем количество каждого товара по умолчанию
+        }));
+        
+        setCartItems(wishlistItems); // Сохраняем товары в состоянии
+        updateTotals(wishlistItems); // Обновляем итоговую сумму
+      })
+      .catch((error) => {
+        console.error('Error fetching wishlist:', error);
+      });
   }, []);
 
   // Функция для обновления итогов (subtotal и total)
@@ -27,17 +42,19 @@ const Cart = () => {
       let price;
   
       // Если строка DefaultPrice содержит более одного символа (например, есть информация о скидке)
-      if (item.DefaultPrice.length > 10) { 
+      if (item.DefaultPrice.length > 10) {
+        console.log(1);
+        
         // Парсим цену из DefaultPrice, игнорируя текст до "$" и символы переноса строки
-        price = parseFloat(item.DefaultPrice.replace('Price reduced from\n$', '').replace('\nto', '').trim());
+        price = parseFloat(item.DefaultPrice);
       } else {
         // Если цена без дополнительной информации, просто парсим ее
-        price = parseFloat(item.DefaultPrice.replace('$', '').trim());
+        price = parseFloat(item.DefaultPrice);
       }
   
       // Если есть скидка, используем цену со скидкой
       if (item.DiscountPrice && item.DiscountPrice !== "N/A") {
-        price = parseFloat(item.DiscountPrice.split(' ')[0].replace('$', '').trim()); // Парсим цену до скидки
+        price = parseFloat(item.DiscountPrice); // Парсим цену до скидки
       }
   
       return acc + price * item.qty;
@@ -50,13 +67,11 @@ const Cart = () => {
       estimatedTotal,
     });
   };
-  
-  
 
   // Обработчик изменения количества товара
   const handleQtyChange = (productId, newQty) => {
     const updatedItems = cartItems.map(item =>
-      item.Id === productId ? { ...item, qty: newQty } : item
+      item.id === productId ? { ...item, qty: newQty } : item
     );
     setCartItems(updatedItems);
     updateTotals(updatedItems);
@@ -75,7 +90,7 @@ const Cart = () => {
                         overflow-y-auto">
           <div className="lg:flex justify-between border-b border-black w-full font-medium hidden">
             <span className='ml-10'>ITEM</span>
-            <div className="flex ">
+            <div className="flex">
                 <span className='mr-28'>QTY</span>
                 <span className='mx-10'>TOTAL</span>
             </div>
@@ -84,7 +99,7 @@ const Cart = () => {
 
           <div className="grid grid-cols-1 gap-5 w-full">
             {cartItems.map(item => (
-              <CartItem key={item.Id} item={item} onQtyChange={handleQtyChange} />
+              <CartItem key={item.id} item={item} onQtyChange={handleQtyChange} />
             ))}
           </div>
           </div>

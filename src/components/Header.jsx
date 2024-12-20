@@ -32,9 +32,11 @@ const Header = () => {
                             Main
                         </button>
                     </Link>
-                    <button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
-                        Product
-                    </button>
+                    <Link to="/product">
+                        <button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+                            Product
+                        </button>
+                    </Link>
                     <Link to="/wishlist">
                         <button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
                             Wish List
