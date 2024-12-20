@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import SearchInput from "./SearchInput";
 import { Link } from "react-router-dom";
+=======
+import React, { useState } from 'react';
+import SearchInput from './common/SearchInput';
+import { Link } from 'react-router-dom';
+>>>>>>> bc2d5b10c402bc01f45cc337e72a8dda6aa0fe4c
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -25,6 +31,7 @@ const Header = () => {
                     <span className="block w-6 h-0.5 bg-white"></span>
                 </button>
 
+<<<<<<< HEAD
                 {/* Left Navigation */}
                 <div className="hidden lg:flex space-x-4">
                     <Link to="/main-page">
@@ -41,6 +48,24 @@ const Header = () => {
                         </button>
                     </Link>
                 </div>
+=======
+		{/* Left Navigation */}
+		<div className="hidden lg:flex space-x-4">
+			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+			Main
+			</button>
+			<Link to="/product">
+			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+			Product
+			</button>
+			</Link>
+			<Link to="/wishlist">
+			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+			Wish List
+			</button>
+			</Link>
+		</div>
+>>>>>>> bc2d5b10c402bc01f45cc337e72a8dda6aa0fe4c
 
                 {/* SearchInput */}
                 <div className="flex-grow lg:mx-4 flex justify-end">
@@ -62,6 +87,7 @@ const Header = () => {
                 </div>
             </div>
 
+<<<<<<< HEAD
             {/* Mobile Navigation Menu */}
             <nav
                 className={`${
@@ -89,6 +115,38 @@ const Header = () => {
                     Profile
                 </Link>
             </nav>
+=======
+		{/* Mobile Navigation Menu */}
+		<nav
+			className={`${
+				menuOpen ? 'block' : 'hidden'
+			} lg:hidden flex flex-col items-center bg-black p-4 w-full absolute top-full left-0 z-20`}
+		>
+			<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+				Main
+			</button>
+			<Link to="/product">
+				<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+					Product
+				</button>
+			</Link>
+			<Link to="/wishlist">
+				<button className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+				Wish List
+				</button>
+			</Link>
+			<Link
+				to="/authorization"
+				className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+				Log in/Register
+			</Link>
+			<Link
+				to="/myaccount"
+				className="px-4 py-2 bg-transparent rounded hover:bg-white hover:text-black">
+				Profile
+			</Link>
+		</nav>
+>>>>>>> bc2d5b10c402bc01f45cc337e72a8dda6aa0fe4c
 
             {/* Overlay for Mobile Menu */}
             {menuOpen && (

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import Red_heart from '../assets/red_heart.png'; // Изображение красного сердечка
-import White_heart from '../assets/white_heart.png'; // Изображение белого сердечка
+import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate для навигации
+import Red_heart from '../assets/red_heart.png'; 
+import White_heart from '../assets/white_heart.png'; 
+import Button from './common/Button.jsx';
 
-const ProductCard = ({ imgSrc, title, description, price }) => {
-  const [isFavorited, setIsFavorited] = useState(true); // Состояние избранного
-  const [isPressed, setIsPressed] = useState(false); // Состояние нажатия
+const ProductCard = ({ imgSrc, title, description, price, onClick }) => {
+  const [isFavorited, setIsFavorited] = useState(true); 
+  const [isPressed, setIsPressed] = useState(false); 
+
+  const navigate = useNavigate(); // Инициализируем navigate
 
   // Функция для переключения состояния избранного
   const toggleFavorite = () => {
@@ -21,11 +25,22 @@ const ProductCard = ({ imgSrc, title, description, price }) => {
     setIsPressed(false);
   };
 
+  // Функция для перенаправления в корзину
+  const moveToCart = () => {
+    navigate('/cart'); // Переход на страницу корзины
+  };
+
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 border-b border-black relative">
+    <div 
+      className="flex flex-col sm:flex-row items-center justify-center gap-4 p-4 border-b border-black relative cursor-pointer"
+      onClick={onClick} 
+    >
       <div className="relative">
         <button
-          onClick={toggleFavorite}
+          onClick={(e) => {
+            e.stopPropagation(); 
+            toggleFavorite();
+          }}
           onMouseDown={handlePress}
           onMouseUp={handleRelease}
           onMouseLeave={handleRelease}
@@ -47,13 +62,7 @@ const ProductCard = ({ imgSrc, title, description, price }) => {
           <p className="font-bold text-sm sm:text-base">{description}</p>
           <p className="uppercase text-sm sm:text-base mb-4">{price}</p>
         </div>
-        <button
-          className="px-4 py-2 bg-black text-white rounded-3xl 
-                    border-solid border-2 font-black border-black hover:bg-white hover:text-black 
-                    uppercase transition-all duration-300"
-        >
-          Move to Cart
-        </button>
+        <Button text="Move to Cart" onClick={moveToCart} />
       </div>
     </div>
   );
