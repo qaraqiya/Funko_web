@@ -103,7 +103,7 @@ const AccountMenu = () => {
         </ul>
         <Button
           text="BACK TO DASHBOARD"
-          onClick={() => console.log('Back to Dashboard')}
+          onClick={() => navigate("/main-page")}
           className="mt-10 px-[20px] py-[8px] font-black bg-black text-white transition-colors duration-200 w-3/4 border-solid border-2 border-black rounded-[24px] hover:bg-white hover:text-black"
         />
 

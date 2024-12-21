@@ -30,7 +30,7 @@ const AddressBook = () => {
     <div className="relative bg-primary-white mt-12 lg:mt-12 h-fit mb-10 2xl:h-svh 
                     mx-auto 2xl:w-full xl:w-[1280px] lg:w-[968px] md:w-[780px] sm:w-[650px] 
                     w-[350px] transition-all">
-      <h1 className="sm:text-6xl text-5xl font-black mb-4 text-center 2xl:text-left break-words">
+      <h1 className="sm:text-6xl text-5xl font-black mb-4 text-center 2xl:text-left break-words 2xl:ml-5">
         ADDRESS BOOK
       </h1>
 

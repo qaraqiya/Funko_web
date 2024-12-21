@@ -3,13 +3,15 @@ import React from 'react';
 const CartItem = ({ item, onQtyChange }) => {
   // Функция для извлечения только числовой части цены из строки
   const extractPrice = (priceString) => {
+    console.log(item)
     // Используем регулярное выражение, чтобы извлечь числовую часть после символа "$"
-    const match = priceString.match(/\$([\d,]+\.\d{2})/);
-    return match ? parseFloat(match[1].replace(',', '')) : 0;
+    const match = priceString; // Регулярное выражение для извлечения числа
+    return match;
   };
 
   // Извлекаем стандартную цену и цену со скидкой (если есть)
-  const price = extractPrice(item.DefaultPrice.replace('\n', '').trim());
+  console.log(item)
+  const price = extractPrice(item.DefaultPrice);
   const discountedPrice = item.DiscountPrice 
     ? extractPrice(item.DiscountPrice) 
     : null;
@@ -21,7 +23,7 @@ const CartItem = ({ item, onQtyChange }) => {
     <div className="flex flex-col lg:flex-row justify-between items-center p-auto sm:p-4 border-b border-black">
       {/* Информация о товаре */}
       <div className="flex flex-col sm:flex-row items-center gap-4">
-        <img src={item.Images[0]} alt={item.Name} className="w-[96px] h-[96px]" />
+        <img src={item.Images[0]?.imageUrl} alt={item.Name} className="w-[96px] h-[96px]" />
         <div className="text-lg font-semibold w-auto">
             <p className="break-words whitespace-normal">{item.Name}</p>
         </div>
@@ -30,11 +32,11 @@ const CartItem = ({ item, onQtyChange }) => {
       <div className="flex gap-20">
         {/* Селектор количества */}
         <div>
-            <label htmlFor={`qty-${item.Id}`} className="font-semibold bg-transparent mr-2">QTY:</label>
+            <label htmlFor={`qty-${item.id}`} className="font-semibold bg-transparent mr-2">QTY:</label>
             <select
-            id={`qty-${item.Id}`}
+            id={`qty-${item.id}`}
             value={item.qty}
-            onChange={(e) => onQtyChange(item.Id, parseInt(e.target.value))}
+            onChange={(e) => onQtyChange(item.id, parseInt(e.target.value))}
             className="border p-2 rounded-md"
             >
             {Array.from({ length: 10 }, (_, i) => i + 1).map(qty => (
