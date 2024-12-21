@@ -7,7 +7,7 @@ import Button from './common/Button.jsx';
 const ProductCard = ({ imgSrc, title, description, price, onClick, onToggleFavorite, isFavorited }) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  const navigate = useNavigate(); // Инициализируем navigate
+  const navigate = useNavigate();
 
   const handlePress = () => setIsPressed(true);
   const handleRelease = () => setIsPressed(false);
@@ -20,8 +20,8 @@ const ProductCard = ({ imgSrc, title, description, price, onClick, onToggleFavor
       <div className="relative">
         <button
           onClick={(e) => {
-            e.stopPropagation();
-            onToggleFavorite(); // Вызов функции для удаления товара
+            e.stopPropagation(); // Останавливаем всплытие события при клике на сердечко
+            onToggleFavorite();  // Вызов функции для удаления или добавления в избранное
           }}
           onMouseDown={handlePress}
           onMouseUp={handleRelease}
@@ -29,7 +29,7 @@ const ProductCard = ({ imgSrc, title, description, price, onClick, onToggleFavor
           className="absolute -top-4 -right-4 p-2 focus:outline-none z-10"
         >
           <img
-            src={isFavorited ? Red_heart : White_heart}
+            src={isFavorited ? Red_heart : White_heart}  // Сердечко становится красным, если товар в избранном
             alt="Heart"
             className={`w-8 h-6 ${isPressed ? 'scale-90' : 'scale-100'} transition-transform duration-200`}
           />

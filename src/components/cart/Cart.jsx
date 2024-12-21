@@ -12,7 +12,7 @@ const Cart = () => {
   });
 
   // Заголовки для авторизации с токеном
-  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcm9uIiwiaWF0IjoxNzM0NzIxMDY0LCJleHAiOjE3MzQ3NzUwNjR9.qF-AnRuwBUrkShgHlA-HeYAKsDBI6aD5iP0Oud5_5wk";
+  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcm9uIiwiaWF0IjoxNzM0Nzc0Njc5LCJleHAiOjE3MzQ4Mjg2Nzl9.0wQyv3qY3gc78Bmao84RCU5WB6a4CpzIdXpwl9K1_Hk";
   const headers = {
     Authorization: `Bearer ${token}`,
     accept: "*/*",
