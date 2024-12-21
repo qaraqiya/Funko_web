@@ -14,7 +14,9 @@ const Wishlist = () => {
   const closeMenu = () => setMenuOpen(false);
 
   // Заголовки для авторизации с токеном
+
   const token = localStorage.getItem('accessToken');
+
   const headers = {
     Authorization: `Bearer ${token}`,
     accept: "*/*",

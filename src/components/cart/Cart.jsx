@@ -9,11 +9,12 @@ const Cart = () => {
     const dispatch = useDispatch();
     const { items, totals } = useSelector((state) => state.cart);
 
-    const token = localStorage.getItem('accessToken');
-    const headers = {
-        Authorization: `Bearer ${token}`,
-        accept: '*/*',
-    };
+  const token = localStorage.getItem('accessToken');
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    accept: "*/*",
+  };
 
     useEffect(() => {
         axios
