@@ -1,5 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -51,9 +52,11 @@ const CircularSlider = () => {
                         Collect Digital Pop! on Droppp to redeem exclusive Pop!
                         Vinyl figures from your favorite brands.
                     </p>
-                    <button className="mt-4 px-6 py-2 font-bold bg-white text-black rounded-full">
-                        Learn More
-                    </button>
+                    <Link to="/product">
+                        <button className="mt-4 px-6 py-2 font-bold bg-white text-black rounded-full">
+                            Learn More
+                        </button>
+                    </Link>
                 </div>
 
                 {/* Swiper Section */}
