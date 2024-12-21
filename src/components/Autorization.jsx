@@ -17,46 +17,33 @@ const Authorization = () => {
       alert('User already logged in');
     }
   }, []);
-
   const handleSubmit = async (e) => {
 	e.preventDefault();
    
+	// Validation for registration passwords
 	if (!isLogin && password !== confirmPassword) {
 	  alert('Passwords do not match');
 	  return;
 	}
    
-	let url = '';
-	if (isLogin) {
-	  url = `https://funko-store.onrender.com/api/auth/login?username=${encodeURIComponent(
-	    username
-	  )}&password=${encodeURIComponent(password)}`;
-	} else {
-	  url = `https://funko-store.onrender.com/api/auth/register?username=${encodeURIComponent(
-	    username
-	  )}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(
-	    lastName
-	  )}&phone=${encodeURIComponent(phone)}&address=${encodeURIComponent(
-	    address
-	  )}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-	}
-   
 	try {
-	  const response = await fetch(url, {
-	    method: 'POST', 
-	    headers: {
-		 'Content-Type': 'application/json',
-	    },
-	  });
-   
-	  if (!response.ok) {
-	    const errorText = await response.text();
-	    throw new Error(errorText || 'Something went wrong');
-	  }
-   
-	  const data = await response.json();
-   
 	  if (isLogin) {
+	    // Login flow through query string
+	    const url = `https://funko-store.onrender.com/api/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+   
+	    const response = await fetch(url, {
+		 method: 'POST',
+		 headers: {
+		   'Content-Type': 'application/json',
+		 },
+	    });
+   
+	    if (!response.ok) {
+		 const errorText = await response.text();
+		 throw new Error(errorText || 'Login failed');
+	    }
+   
+	    const data = await response.json();
 	    if (data.accessToken && data.refreshToken) {
 		 localStorage.setItem('accessToken', data.accessToken);
 		 localStorage.setItem('refreshToken', data.refreshToken);
@@ -65,14 +52,41 @@ const Authorization = () => {
 		 throw new Error('Invalid login response');
 	    }
 	  } else {
-	    localStorage.setItem('userInfo', JSON.stringify(data));
+	    // Registration flow
+	    const url = 'https://funko-store.onrender.com/api/auth/register';
+	    const registrationBody = {
+		 username,
+		 firstName,
+		 lastName,
+		 phone,
+		 address,
+		 email,
+		 password,
+	    };
+   
+	    const response = await fetch(url, {
+		 method: 'POST',
+		 headers: {
+		   'Content-Type': 'application/json',
+		 },
+		 body: JSON.stringify(registrationBody),
+	    });
+   
+	    if (!response.ok) {
+		 const errorText = await response.text();
+		 throw new Error(errorText || 'Registration failed');
+	    }
+   
+	    const data = await response.json();
 	    alert('Registration successful!');
+	    localStorage.setItem('userInfo', JSON.stringify(data)); // Save user data
 	  }
 	} catch (error) {
 	  console.error('Error:', error.message);
-	  alert(error.message);
+	  alert(`Error: ${error.message}`);
 	}
    };
+   
    
 
   const fetchProtectedData = async () => {
