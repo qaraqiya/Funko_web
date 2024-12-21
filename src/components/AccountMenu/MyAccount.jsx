@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import ProductCard from '../ProductCard';
+import axios from 'axios';
+
 
 
 const wishlistItems = [
@@ -21,6 +23,41 @@ const wishlistItems = [
   ];
 
 const MyAccount = () => {
+  const [profile, setProfile] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('https://funko-store.onrender.com/api/users/profile', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          }
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to fetch profile');
+        }
+
+
+
+        const data = await response.json();
+
+        console.log(data);
+
+        setProfile(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+
   const navigate = useNavigate();
   return (
     <div className="container mt-4 lg:mt-8 flex flex-col justify-center mx-auto">
@@ -60,15 +97,15 @@ const MyAccount = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <div className="text-gray-500">First Name</div>
-                  <div className="mt-1 break-words">Aron</div>
+                  <div className="mt-1 break-words">{profile?.firstName}</div>
                 </div>
                 <div>
-                  <div className="text-gray-500">Last Name</div>
-                  <div className="mt-1 break-words">Nurgaliyev</div>
+                  <div className="text-gray-500">last Name</div>
+                  <div className="mt-1 break-words">{profile?.lastName}</div>
                 </div>
                 <div className="mt-4">
                   <div className="text-gray-500">Email</div>
-                  <div className="mt-1 break-words">230107013@sdu.edu.kz</div>
+                  <div className="mt-1 break-words">{profile?.email}</div>
                 </div>
                 <div className="mt-4">
                   <div className="text-gray-500">Password</div>
@@ -123,11 +160,11 @@ const MyAccount = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <div className="text-gray-500">Home Address</div>
-                  <div className="mt-1">123 Funko Street</div>
+                  <div className="mt-1">{profile?.address}</div>
                 </div>
                 <div>
                   <div className="text-gray-500">Shipping Address</div>
-                  <div className="mt-1">456 Collectible Ave</div>
+                  <div className="mt-1">{profile?.address}</div>
                 </div>
               </div>
             </div>
