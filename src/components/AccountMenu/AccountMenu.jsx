@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from './common/Button';
+import Button from '../common/Button';
 
 const AccountMenu = () => {
   const [isOpen, setIsOpen] = useState(false); // Состояние для отображения меню
@@ -45,7 +45,7 @@ const AccountMenu = () => {
                 className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-3px] 
                 after:w-full after:h-0 after:bg-black after:rounded after:transition-all 
                 after:duration-300 after:ease-out hover:after:h-[5px] uppercase"
-                href=""
+                onClick={() => navigate('/address-book')}
               >
                 Address Book
               </a>
@@ -57,19 +57,7 @@ const AccountMenu = () => {
                 className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-3px] 
                 after:w-full after:h-0 after:bg-black after:rounded after:transition-all 
                 after:duration-300 after:ease-out hover:after:h-[5px] uppercase"
-                href=""
-              >
-                Payments
-              </a>
-            </h3>
-          </li>
-          <li className='w-full font-black'>
-            <h3 className="w-full">
-              <a
-                className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-3px] 
-                after:w-full after:h-0 after:bg-black after:rounded after:transition-all 
-                after:duration-300 after:ease-out hover:after:h-[5px] uppercase"
-                href=""
+                onClick={() => navigate('/order-history')}
               >
                 Order History
               </a>
@@ -81,7 +69,7 @@ const AccountMenu = () => {
                 className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-3px] 
                 after:w-full after:h-0 after:bg-black after:rounded after:transition-all 
                 after:duration-300 after:ease-out hover:after:h-[5px] uppercase"
-                href=""
+                onClick={() => navigate('/preorder')}
               >
                 Pre-Orders
               </a>
@@ -106,7 +94,7 @@ const AccountMenu = () => {
                 className="relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-3px] 
                 after:w-full after:h-0 after:bg-black after:rounded after:transition-all 
                 after:duration-300 after:ease-out hover:after:h-[5px] uppercase"
-                href=""
+                onClick={() => navigate('/notification-settings')}
               >
                 Notification Settings
               </a>
@@ -115,7 +103,7 @@ const AccountMenu = () => {
         </ul>
         <Button
           text="BACK TO DASHBOARD"
-          onClick={() => console.log('Back to Dashboard')}
+          onClick={() => navigate("/main-page")}
           className="mt-10 px-[20px] py-[8px] font-black bg-black text-white transition-colors duration-200 w-3/4 border-solid border-2 border-black rounded-[24px] hover:bg-white hover:text-black"
         />
 
