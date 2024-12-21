@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Slider from "./Slider";
 import ProductsMain from "./ProductsMain";
 import CircularSlider from "./CircularSlider";

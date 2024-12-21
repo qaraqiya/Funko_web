@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import chowder from "../assets/Belt-Banner-pop-chowder-Hero-exclusive-product.png";
 import exclusive from "../assets/exclusive-badge.png";
 import DBpop from "../assets/BuddyBlade-A-DB-Product-83877.png";
@@ -7,6 +8,21 @@ import SportsPOP from "../assets/BuddyBlade-B-Seahawks-Product-50977.png";
 import SportsPOPBG from "../assets/BuddyBlade-B-Seahawks-Background.jpg";
 
 const ProductsMain = () => {
+    const navigate = useNavigate();
+
+    const fetchSportsProducts = async () => {
+        try {
+            const response = await fetch(
+                "https://funko-store.onrender.com/api/products?category=SPORTS&page=0&size=10"
+            );
+            const data = await response.json();
+
+            // Navigate to the products page with the fetched data
+            navigate("/products", { state: { products: data } });
+        } catch (error) {
+            console.error("Error fetching sports products:", error);
+        }
+    };
     const products = [
         {
             id: 1,
@@ -108,7 +124,9 @@ const ProductsMain = () => {
                         <p className="mt-2 text-white text-sm">
                             {products[2].description}
                         </p>
-                        <button className="mt-4 px-4 py-2 font-bold bg-white text-black rounded-full">
+                        <button
+                            className="mt-4 px-4 py-2 font-bold bg-white text-black rounded-full"
+                            onClick={fetchSportsProducts}>
                             {products[2].buttonText}
                         </button>
                     </div>
