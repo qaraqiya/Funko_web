@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
 import ProductModal from "./ProductModal";
-import Red_heart from "../assets/red_heart.png"; // Изображение красного сердечка
-import White_heart from "../assets/white_heart.png"; // Изображение белого сердечка
+import Red_heart from "../assets/red_heart.png"; // Red heart image
+import White_heart from "../assets/white_heart.png"; // White heart image
 import axios from "axios";
 import Button from "./common/Button";
+import { useParams } from "react-router-dom"; // Import useParams from React Router
 
 const ProductPage = () => {
-    const [products, setProducts] = useState([]); // Состояние для хранения продуктов
+    const { category } = useParams(); // Get the category from the URL
+    const [products, setProducts] = useState([]); // Store products
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [favoriteProducts, setFavoriteProducts] = useState({});
-    const [currentPage, setCurrentPage] = useState(0); // Текущее значение страницы
-    const [hasMoreProducts, setHasMoreProducts] = useState(true); // Для отслеживания, есть ли ещё товары для загрузки
-    const [loading, setLoading] = useState(false); // Для отображения индикатора загрузки
+    const [currentPage, setCurrentPage] = useState(0);
+    const [hasMoreProducts, setHasMoreProducts] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    const token =
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcm9uIiwiaWF0IjoxNzM0NzIxMDY0LCJleHAiOjE3MzQ3NzUwNjR9.qF-AnRuwBUrkShgHlA-HeYAKsDBI6aD5iP0Oud5_5wk"; // Замените на ваш токен
+    const token = localStorage.getItem("accessToken");
     const headers = {
         Authorization: `Bearer ${token}`,
         accept: "*/*",
     };
 
-    // Функция для загрузки товаров
+    // Function to fetch products based on category
     const fetchProducts = (page) => {
         setLoading(true);
         axios
@@ -29,6 +30,7 @@ const ProductPage = () => {
                 params: {
                     page: page,
                     size: 52,
+                    category: category, // Include category in the request
                 },
             })
             .then((response) => {
@@ -37,7 +39,7 @@ const ProductPage = () => {
                     ...prevProducts,
                     ...newProducts,
                 ]);
-                setHasMoreProducts(newProducts.length > 0); // Если количество товаров 0, значит больше нет
+                setHasMoreProducts(newProducts.length > 0);
                 setLoading(false);
             })
             .catch((error) => {
@@ -47,16 +49,12 @@ const ProductPage = () => {
     };
 
     useEffect(() => {
-        // Загружаем состояние любимых товаров из localStorage
-        const storedFavorites =
-            JSON.parse(localStorage.getItem("favoriteProducts")) || {};
-        setFavoriteProducts(storedFavorites);
-
-        // Загрузка первой страницы товаров при монтировании компонента
+        // Fetch products when component mounts or category changes
+        setProducts([]); // Clear previous products when category changes
         fetchProducts(currentPage);
-    }, []);
+    }, [category]); // Fetch products whenever the category changes
 
-    // Функция для переключения состояния избранного для конкретного продукта
+    // Handle toggling favorites
     const toggleFavorite = (productId) => {
         const newFavorites = {
             ...favoriteProducts,
@@ -64,10 +62,9 @@ const ProductPage = () => {
         };
         setFavoriteProducts(newFavorites);
 
-        // Сохраняем изменения в localStorage
         localStorage.setItem("favoriteProducts", JSON.stringify(newFavorites));
 
-        const isFavorite = !favoriteProducts[productId]; // Состояние перед переключением
+        const isFavorite = !favoriteProducts[productId];
         const apiEndpoint = isFavorite
             ? `https://funko-store.onrender.com/api/wishlist/add/${productId}`
             : `https://funko-store.onrender.com/api/wishlist/remove/${productId}`;
@@ -98,7 +95,6 @@ const ProductPage = () => {
     const openModal = (product) => setSelectedProduct(product.id);
     const closeModal = () => setSelectedProduct(null);
 
-    // Функция для загрузки следующей страницы товаров
     const loadMoreProducts = () => {
         const nextPage = currentPage + 1;
         setCurrentPage(nextPage);
@@ -154,14 +150,12 @@ const ProductPage = () => {
                 </div>
             ))}
 
-            {/* Кнопка "Загрузить еще" */}
             {hasMoreProducts && !loading && (
                 <div className="w-full flex justify-center mt-6">
                     <Button text="More" onClick={loadMoreProducts} />
                 </div>
             )}
 
-            {/* Индикатор загрузки */}
             {loading && (
                 <div className="w-full flex justify-center mt-6">
                     <p>Loading...</p>
