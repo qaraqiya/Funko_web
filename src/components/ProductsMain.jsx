@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import chowder from "../assets/Belt-Banner-pop-chowder-Hero-exclusive-product.png";
 import exclusive from "../assets/exclusive-badge.png";
 import DBpop from "../assets/BuddyBlade-A-DB-Product-83877.png";
@@ -18,7 +18,7 @@ const ProductsMain = () => {
             const data = await response.json();
 
             // Navigate to the products page with the fetched data
-            navigate("/products", { state: { products: data } });
+            navigate("/product", { state: { products: data } });
         } catch (error) {
             console.error("Error fetching sports products:", error);
         }
@@ -65,9 +65,11 @@ const ProductsMain = () => {
                     />
                     <h2 className="text-4xl font-bold">{products[0].title}</h2>
                     <p className="mt-2 text-l">{products[0].description}</p>
-                    <button className="mt-4 px-4 py-2 bg-black text-white rounded-full">
-                        {products[0].buttonText}
-                    </button>
+                    <Link to={`/category/ANIMATION_AND_CARTOONS`}>
+                        <button className="mt-4 px-4 py-2 bg-black font-bold text-white rounded-full">
+                            {products[0].buttonText}
+                        </button>
+                    </Link>
                 </div>
                 <div className="flex justify-center items-center w-1/2">
                     <img
@@ -96,9 +98,11 @@ const ProductsMain = () => {
                         <p className="mt-2 text-sm">
                             {products[1].description}
                         </p>
-                        <button className="mt-4 px-4 py-2 font-bold bg-black text-white rounded-full">
-                            {products[1].buttonText}
-                        </button>
+                        <Link to={`/category/ANIME_AND_MANGA`}>
+                            <button className="mt-4 px-4 py-2 font-bold bg-black text-white rounded-full">
+                                {products[1].buttonText}
+                            </button>
+                        </Link>
                     </div>
 
                     <img
@@ -124,11 +128,13 @@ const ProductsMain = () => {
                         <p className="mt-2 text-white text-sm">
                             {products[2].description}
                         </p>
-                        <button
-                            className="mt-4 px-4 py-2 font-bold bg-white text-black rounded-full"
-                            onClick={fetchSportsProducts}>
-                            {products[2].buttonText}
-                        </button>
+                        <Link to={`/category/SPORTS`}>
+                            <button
+                                className="mt-4 px-4 py-2 font-bold bg-white text-black rounded-full"
+                                onClick={fetchSportsProducts}>
+                                {products[2].buttonText}
+                            </button>
+                        </Link>
                     </div>
 
                     <img

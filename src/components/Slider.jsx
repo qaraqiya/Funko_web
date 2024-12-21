@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -68,9 +69,11 @@ const Slider = () => {
                             <p className="mt-4 font-bold text-xl">
                                 {slide.description}
                             </p>
-                            <button className="mt-6 px-6 py-2 bg-black text-white font-bold rounded-full">
-                                {slide.buttonText}
-                            </button>
+                            <Link to="/product">
+                                <button className="mt-6 px-6 py-2 bg-black text-white font-bold rounded-full">
+                                    {slide.buttonText}
+                                </button>
+                            </Link>
                         </div>
                         <img
                             src={slide.image}
