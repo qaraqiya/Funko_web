@@ -11,8 +11,7 @@ const Cart = () => {
     estimatedTotal: 0,
   });
 
-  // Заголовки для авторизации с токеном
-  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcm9uIiwiaWF0IjoxNzM0NzIxMDY0LCJleHAiOjE3MzQ3NzUwNjR9.qF-AnRuwBUrkShgHlA-HeYAKsDBI6aD5iP0Oud5_5wk";
+  const token = localStorage.getItem('accessToken');
   const headers = {
     Authorization: `Bearer ${token}`,
     accept: "*/*",

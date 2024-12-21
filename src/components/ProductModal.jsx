@@ -72,7 +72,7 @@ const ProductModal = ({ productId, onClose }) => {
   const [product, setProduct] = useState(null); // Для хранения данных о товаре
   const [randomRecommendations, setRandomRecommendations] = useState([]);
   
-  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcm9uIiwiaWF0IjoxNzM0NzIwNDQxLCJleHAiOjE3MzQ3MjEzNDF9.CT_J0piyXIFdj5MJ23g4Lhj4QvpmlCSFbNbzW22Mze4";
+  const token = localStorage.getItem('accessToken');
   const headers = {
     Authorization: `Bearer ${token}`,
     accept: "*/*"

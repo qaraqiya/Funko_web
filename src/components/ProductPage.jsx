@@ -13,7 +13,7 @@ const ProductPage = () => {
   const [hasMoreProducts, setHasMoreProducts] = useState(true); // Для отслеживания, есть ли ещё товары для загрузки
   const [loading, setLoading] = useState(false); // Для отображения индикатора загрузки
 
-  const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcm9uIiwiaWF0IjoxNzM0NzIxMDY0LCJleHAiOjE3MzQ3NzUwNjR9.qF-AnRuwBUrkShgHlA-HeYAKsDBI6aD5iP0Oud5_5wk"; // Замените на ваш токен
+  const token = localStorage.getItem('accessToken');
   const headers = {
     Authorization: `Bearer ${token}`,
     accept: "*/*",
